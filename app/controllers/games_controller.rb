@@ -30,6 +30,7 @@ class GamesController < ApplicationController
   def show
     @wins_and_losses = @game.wins_and_losses
     @deletable_results = Result.find_deletable_for(@game)
+    @streaks = Result.find_winning_streaks(@game)
     respond_to do |format|
       format.html
       format.json do

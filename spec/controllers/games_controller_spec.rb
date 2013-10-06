@@ -142,6 +142,19 @@ describe GamesController do
       assigns(:deletable_results).should == Result.find_deletable_for(game)
     end
 
+    it "exposes winning streaks" do
+      game = FactoryGirl.create(:game)
+      player = FactoryGirl.create(:player)
+
+      FactoryGirl.create(:result, :game => game, :winner => player)
+      FactoryGirl.create(:result, :game => game, :winner => player)
+      FactoryGirl.create(:result, :game => game, :winner => player)
+
+      get :show, :id => game
+
+      assigns(:streaks).should == Result.find_winning_streaks(game)
+    end
+
     it "returns a json response" do
       Timecop.freeze(Time.now) do
         game = FactoryGirl.create(:game)
