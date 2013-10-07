@@ -1,0 +1,12 @@
+<div class="hero-unit">
+  <h1><%= @venue.name %></h1>
+
+  <div class="description"><%= @venue.description %></div>
+  <section class="action-buttons">
+    <span><%= link_to 'Edit Venue', edit_venue_path(@venue), :class => "btn btn-primary" %></span>
+    <% # todo - if @venue.players.empty? and @venue.challenges.empty? %>
+      <span><%= link_to "Delete", venue_path(@venue), :method => :delete, :confirm => "Are you sure?", :class => "btn btn-danger" %></span>
+    <% #end %>
+  </section>
+</div>
+
