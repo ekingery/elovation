@@ -3,14 +3,24 @@ require "spec_helper"
 describe Player do
   describe "as_json" do
     it "returns the json representation of the player" do
-      player = FactoryGirl.build(:player, :name => "John Doe", :email => "foo@example.com")
+      player = FactoryGirl.build(:player, :name => "John Doe", :email => "foo@example.com", :twitter => "3E23")
 
       player.as_json.should == {
         :name => "John Doe",
-        :email => "foo@example.com"
+        :email => "foo@example.com",
+        :twitter => "3E23"
       }
     end
   end
+
+  describe "name" do
+    it "has a name" do
+      player = FactoryGirl.create(:player, :name => "Drew")
+
+      player.name.should == "Drew"
+    end
+  end
+
   describe "validations" do
     context "name" do
       it "is required" do
@@ -30,11 +40,6 @@ describe Player do
     end
 
     context "email" do
-      it "can be blank" do
-        player = FactoryGirl.build(:player, :email => "")
-        player.should be_valid
-      end
-
       it "must be a valid email format" do
         player = Player.new
         player.email = "invalid-email-address"
@@ -44,15 +49,75 @@ describe Player do
         player.valid?
         player.errors[:email].should == []
       end
-    end
-  end
 
-  describe "name" do
-    it "has a name" do
-      player = FactoryGirl.create(:player, :name => "Drew")
+      it "is required" do
+        player = FactoryGirl.build(:player, :name => 'test', :email => nil)
+        player.should_not be_valid
+        player.errors[:email].should == ["is invalid", "can't be blank"]
+      end
 
-      player.name.should == "Drew"
+      it "must be unique" do
+        FactoryGirl.create(
+          :player, :name => "Drew", :email => "test@example.com")
+        player = FactoryGirl.build(
+          :player, :name => "Drew2", :email => "test@example.com")
+
+        player.should_not be_valid
+        player.errors[:email].should == ["has already been taken"]
+      end
     end
+
+    context "twitter" do
+      it "can be blank" do
+        player = FactoryGirl.build(
+          :player, :name => 'test', :email => "test@abc.com", :twitter => "")
+        player.should be_valid
+      end
+
+      it "must be a valid twitter address" do
+        player = Player.new
+        player.twitter = "invalidtwitteraddresstoolong"
+        player.should_not be_valid
+        player.errors[:twitter].should == ["is invalid"]
+
+        player.twitter = "invalid-char*"
+        player.should_not be_valid
+        player.errors[:twitter].should == ["is invalid"]
+
+        player.twitter = "3E23"
+        player.valid?
+        player.errors[:twitter].should == []
+      end
+
+      it "strips leading ampersats from twitter handles" do
+        player = FactoryGirl.create(
+          :player, :name => "Drew", :email => "a@test.com", :twitter => "@3E23")
+        player.valid?
+        player.errors[:twitter].should == []
+        player.twitter.should == "3E23"
+
+        # but does not strip non leading ampersats
+        player.twitter = "3@E23"
+        player.valid?
+        player.errors[:twitter].should ==["is invalid"]
+      end
+
+      it "must be unique" do
+        FactoryGirl.create(
+          :player, :name => "Drew", :email => "a@abc.com", :twitter => "3E23")
+        player = FactoryGirl.build(
+          :player, :name => "Drew2", :email => "b@abc.com", :twitter => "3E23")
+        player.should_not be_valid
+        player.errors[:twitter].should == ["has already been taken"]
+
+        # test case sensitivity
+        player = FactoryGirl.build(
+          :player, :name => "Drew3", :email => "c@abc.com", :twitter => "3e23")
+        player.should_not be_valid
+        player.errors[:twitter].should == ["has already been taken"]
+      end
+    end
+
   end
 
   describe "recent_results" do

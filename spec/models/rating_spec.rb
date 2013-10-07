@@ -21,7 +21,8 @@ describe Rating do
       rating.as_json.should == {
         :player => {
           :name => player.name,
-          :email => player.email
+          :email => player.email,
+          :twitter => nil
         },
         :value => 1000
       }

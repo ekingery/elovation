@@ -1,6 +1,18 @@
 <div class="hero-unit">
   <h1><%= @player.name %></h1>
-  <div><%= image_tag(gravatar_url(@player, :size => 80)) %></div>
+
+  <div>
+  
+  <% if @player.twitter.empty? %>
+    <%= image_tag(gravatar_url(@player, :size => 80)) %>
+  <% else %>
+    <%= link_to(image_tag(gravatar_url(@player, :size => 80), 
+                :alt => '@'+@player.twitter, :title => '@'+@player.twitter), 
+                "https://twitter.com/" + @player.twitter, :target => "_blank") 
+              %>
+  <% end %>
+  
+  </div>
   <section class="action-buttons">
     <span><%= link_to 'Edit Player', edit_player_path(@player), :class => "btn btn-primary" %></span>
     <% if @player.results.empty? %>

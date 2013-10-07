@@ -30,12 +30,21 @@ class Player < ActiveRecord::Base
   end
 
   validates :name, :uniqueness => true, :presence => true
-  validates :email, :format => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :allow_blank => true
+  validates :email, :uniqueness => true, :format => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :presence => true
+  validates :twitter, :uniqueness => {:case_sensitive => false}, 
+    :format => /^[A-Za-z0-9_]{1,15}$/i, :allow_blank => true
+
+  # strip leading ampersat if the user entered one, pre-validation
+  def twitter=(value)
+    value.gsub!(/^\@/, '')
+    write_attribute(:twitter, value)
+  end
 
   def as_json
     {
       :name => name,
-      :email => email
+      :email => email,
+      :twitter => twitter,
     }
   end
 
