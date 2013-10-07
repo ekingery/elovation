@@ -26,6 +26,7 @@
       <div class="span3">
         <div class="well sidebar-nav">
           <ul class="nav nav-list">
+
             <li class="nav-header">
               <span>Games</span>
               <span><%= link_to "Add", new_game_path, :class => "btn btn-small btn-sidebar" %></span>
@@ -35,6 +36,7 @@
                 <%= link_to game.name, game_path(game) %>
               </li>
             <% end %>
+
             <li class="nav-header">
               <span>Players</span>
               <span><%= link_to "Add", new_player_path, :class => "btn btn-small btn-sidebar" %></span>
@@ -44,6 +46,17 @@
                 <%= link_to player.name, player_path(player) %>
               </li>
             <% end %>
+
+            <li class="nav-header">
+              <span>Venues</span>
+              <span><%= link_to "Add", new_venue_path, :class => "btn btn-small btn-sidebar" %></span>
+            </li>
+            <% Venue.all.sort_by(&:name).each do |venue| %>
+              <li class="<%= "active" if @venue == venue %>">
+                <%= link_to venue.name, venue_path(venue) %>
+              </li>
+            <% end %>
+
           </ul>
         </div>
       </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002044836) do
+ActiveRecord::Schema.define(:version => 20131007035050) do
 
   create_table "challenges", :force => true do |t|
     t.integer  "challenger_id"
@@ -82,5 +82,13 @@ ActiveRecord::Schema.define(:version => 20131002044836) do
   add_index "results", ["game_id"], :name => "index_results_on_game_id"
   add_index "results", ["loser_id"], :name => "index_results_on_loser_id"
   add_index "results", ["winner_id"], :name => "index_results_on_winner_id"
+
+  create_table "venues", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end
