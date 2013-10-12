@@ -38,7 +38,7 @@ class Challenge < ActiveRecord::Base
   end
 
   def self.expiration_threshold
-    return 5.days
+    return 14.days
   end
 
   def as_json(options = {})
