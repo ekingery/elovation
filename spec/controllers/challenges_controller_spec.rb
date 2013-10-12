@@ -88,8 +88,8 @@ describe ChallengesController do
 
       active_challenge = FactoryGirl.create(:challenge, :game => game_1, :challenger => player_1, :challengee => player_2)
 
-      time_1 = 6.days.ago
-      time_2 = 5.days.ago
+      time_1 = 15.days.ago
+      time_2 = 14.days.ago
 
       Timecop.freeze(time_1) do
         FactoryGirl.create(:challenge, :game => game_1, :challenger => player_2, :challengee => player_3)
@@ -119,7 +119,7 @@ describe ChallengesController do
       player_1 = FactoryGirl.create(:player)
       player_2 = FactoryGirl.create(:player)
 
-      Timecop.freeze(6.days.ago) do
+      Timecop.freeze(15.days.ago) do
         FactoryGirl.create(:challenge, :game => game, :challenger => player_1, :challengee => player_2)
       end
 
@@ -141,7 +141,7 @@ describe ChallengesController do
       old_rating_1 = player_1_rating.value
       old_rating_2 = player_2_rating.value
 
-      Timecop.freeze(6.days.ago) do
+      Timecop.freeze(15.days.ago) do
         FactoryGirl.create(:challenge, :game => game, :challenger => player_1, :challengee => player_2)
       end
 

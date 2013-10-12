@@ -13,7 +13,7 @@ describe Challenge do
         challenge.as_json.should == {
           :challenger => challenger.name,
           :challengee => challengee.name,
-          :expires_at => 5.days.from_now.utc.to_s,
+          :expires_at => 14.days.from_now.utc.to_s,
         }
       end
     end
@@ -55,7 +55,7 @@ describe Challenge do
   describe "expires_at" do
     it "is based on created_at" do
       challenge = FactoryGirl.create(:challenge)
-      challenge.expires_at.should == challenge.created_at + 5.days
+      challenge.expires_at.should == challenge.created_at + 14.days
     end
   end
 

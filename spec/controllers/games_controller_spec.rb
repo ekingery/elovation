@@ -190,8 +190,8 @@ describe GamesController do
             {"winner" => player3.name, "loser" => player1.name, "created_at" => Time.now.utc.to_s}
           ],
           "challenges" => [
-            {"challenger" => player1.name, "challengee" => player2.name, "expires_at" => 5.days.from_now.utc.to_s },
-            {"challenger" => player2.name, "challengee" => player3.name, "expires_at" => 5.days.from_now.utc.to_s }
+            {"challenger" => player1.name, "challengee" => player2.name, "expires_at" => 14.days.from_now.utc.to_s },
+            {"challenger" => player2.name, "challengee" => player3.name, "expires_at" => 14.days.from_now.utc.to_s }
           ]
         }
       end
