@@ -1,24 +1,51 @@
 <div class="hero-unit">
   <h1>Chicago Techpong</h1>
   <br />
-  <h2><ul><li><a href="http://techpong.com" target="_blank">Rules and Info</a></li></ul></h2>
-  <h2><ul><li>Contact <a href="https://twitter.com/techpong" target="_blank">via twitter</a> 
-      or <a href="mailto:ekingery@gmail.com">email Eric</a></li></ul></h2>
+  <h3>Challenge Ladder Rules</h3>
+  <ol>
+    <li>Official matches are best of 3 games until 11, alternate serves every
+    2 points. </li>
+    <ul>
+      <li>Rules default to the <a target="_blank"
+        href="http://www.ittf.com/ittf_handbook/ittf_hb.html">ITTF Handbook</a>.
+      Wikipedia has a <a target="_blank"
+        href="http://en.wikipedia.org/wiki/Table_tennis#Gameplay">short summary</a>.</li>
+      <li>Players are welcome to modify rules. Any modifications should be mutually agreed upon.</li>
+    </ul>
+    <li>The lower ranked challenger is responsible for scheduling the challenge match.</li>
+    <li>The lower ranked challenger should travel to the opponent's home venue,
+    unless otherwise agreed upon.</li>
+    <ul><li>If the higher ranked player has no home venue, the game should be
+      played at the challenger's home venue, unless otherwise agreed upon.</li></ul>
+    <li>Challenges expire in 14 days, resulting in an automatic win for the challenger.</li>
+    <ul><li>This assumes a good faith effort by the challenger to schedule the
+      match. At least two and preferably three scheduling attempts constitute
+      a good faith effort. </li></ul>
+  </ol>
+  <h3>About</h3>
+  <ul>
+    <li>Contact: <a href="https://twitter.com/techpong" target="_blank">@techpong</a> or <a href="mailto:ekingery+techpong@gmail.com">send Eric an email.</a></li>
+    <li>Organizers: <a href="https://twitter.com/3E23" target="_blank">@3E23</a> and <a href="https://twitter.com/zackgilbert" target="_blank">@zackgilbert</a></li>
+    <li>Additional players are welcome. You can share the credentials directly or have new players request them via DM.</li>
+    <li><a href="https://github.com/ekingery/elovation/">Elovation Source Code</a></li>
+    <li><a href="http://techpong.com" target="_blank">Techpong splash page</a></li>
+  </ul>
+
 </div>
 <% @games.each do |game| %>
-<div class="row-fluid">
-  <div class="span6">
-    <h2>Recent Results for <%= link_to game.name, game_path(game) %></h2>
-    <% if game.recent_results.any? %>
-      <ul>
-        <%= render :partial => 'result', :collection => game.recent_results %>
-      </ul>
-    <% end %>
-  </div>
-  <div class="span6">
-    <h2>Recent Ratings</h2>
-    <ol>
-      <%= render :partial => 'rating', :collection => game.all_ratings.select(&:active?) %>
-    </ol>
-</div>
-<% end %>
+  <div class="row-fluid">
+    <div class="span6">
+      <h2>Recent Results for <%= link_to game.name, game_path(game) %></h2>
+      <% if game.recent_results.any? %>
+        <ul>
+          <%= render :partial => 'result', :collection => game.recent_results %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="span6">
+      <h2>Recent Ratings</h2>
+      <ol>
+        <%= render :partial => 'rating', :collection => game.all_ratings.select(&:active?) %>
+      </ol>
+    </div>
+  <% end %>
