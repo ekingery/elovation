@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
   include ParamsCleaner
 
-  allowed_params :player => [:name, :email, :twitter]
+  allowed_params :player => [:name, :email, :twitter, :venue_id]
 
   before_filter :_find_player, :only => [:edit, :destroy, :show, :update]
 

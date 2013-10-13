@@ -13,6 +13,11 @@
   <% end %>
   
   </div>
+  <% if @player.venue.nil? %>
+    <h2> Home Venue: None </h2>
+  <% else %>
+    <h2> Home Venue: <%= link_to @player.venue.name, venue_path(@player.venue) %></h2>
+  <% end %>
   <section class="action-buttons">
     <span><%= link_to 'Edit Player', edit_player_path(@player), :class => "btn btn-primary" %></span>
     <% if @player.results.empty? %>

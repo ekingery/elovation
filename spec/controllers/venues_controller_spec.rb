@@ -58,26 +58,23 @@ describe VenuesController do
     end
   end
 
-  #describe "destroy" do
-    #it "allows deleting venues without players" do
-      #venue = FactoryGirl.create(:venue, :name => "First name")
-#
-      #delete :destroy, :id => venue
-#
-      #response.should redirect_to(dashboard_path)
-      #Venue.find_by_id(venue.id).should be_nil
-    #end
+  describe "destroy" do
+    it "allows deleting venues without players" do
+      venue = FactoryGirl.create(:venue, :name => "Test venue")
+      delete :destroy, :id => venue
+      response.should redirect_to(dashboard_path)
+      Venue.find_by_id(venue.id).should be_nil
+    end
 
-    #it "doesn't allow deleting venues with players" do
-      #venue = FactoryGirl.create(:venue, :name => "First name")
-      #FactoryGirl.create(:result, :venue => venue)
-
-      #delete :destroy, :id => venue
-
-      #response.should redirect_to(dashboard_path)
-      #Venue.find_by_id(venue.id).should == venue
-    #end
-  #end
+    it "does not allow deleting venues with players" do
+      venue = FactoryGirl.create(:venue, :name => "Test venue")
+      player = FactoryGirl.create(
+        :player, :name => "Tester", :email => "test@somewhere.com", :venue => venue)
+      delete :destroy, :id => venue
+      response.should redirect_to(dashboard_path)
+      Venue.find_by_id(venue.id).should == venue
+    end
+  end
 
   describe "update" do
     context "with valid params" do

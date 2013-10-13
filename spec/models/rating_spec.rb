@@ -22,7 +22,8 @@ describe Rating do
         :player => {
           :name => player.name,
           :email => player.email,
-          :twitter => nil
+          :twitter => nil,
+          :venue => nil
         },
         :value => 1000
       }

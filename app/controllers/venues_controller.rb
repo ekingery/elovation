@@ -16,7 +16,7 @@ class VenuesController < ApplicationController
   end
 
   def destroy
-    @venue.destroy # if @venue.results.empty? #todo - potentially check players?
+    @venue.destroy if @venue.players.empty? 
     redirect_to dashboard_path
   end
 
@@ -45,7 +45,6 @@ class VenuesController < ApplicationController
   end
 
   def _find_venue
-    #@venue = Venue.includes(:players).where(:id =>params[:id]).first
     @venue = Venue.where(:id =>params[:id]).first
   end
 end

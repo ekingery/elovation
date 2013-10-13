@@ -3,12 +3,18 @@ require "spec_helper"
 describe Player do
   describe "as_json" do
     it "returns the json representation of the player" do
-      player = FactoryGirl.build(:player, :name => "John Doe", :email => "foo@example.com", :twitter => "3E23")
+      venue = Venue.new
+      venue.name = "test venue"
+      venue.address = "123 fake st"
+      player = FactoryGirl.build(
+        :player, :name => "John Doe", :email => "foo@example.com", :twitter => "3E23", 
+        :venue => venue)
 
       player.as_json.should == {
         :name => "John Doe",
         :email => "foo@example.com",
-        :twitter => "3E23"
+        :twitter => "3E23",
+        :venue => { :name => "test venue", :address => "123 fake st", :description => nil }
       }
     end
   end
@@ -118,6 +124,19 @@ describe Player do
       end
     end
 
+    context "venue" do
+      it "can be nil" do
+        player = FactoryGirl.build(
+          :player, :name => 'test', :email => "test@abc.com", :twitter => "", :venue => nil)
+        player.should be_valid
+      end
+
+      it "finds venue for the given player" do
+        venue = FactoryGirl.create(:venue)
+        player = FactoryGirl.build(:player, :venue => venue)
+        player.venue.should == venue
+      end
+    end
   end
 
   describe "recent_results" do

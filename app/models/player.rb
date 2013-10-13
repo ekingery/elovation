@@ -1,4 +1,6 @@
 class Player < ActiveRecord::Base
+  belongs_to :venue
+
   has_many :ratings, :order => "value DESC", :dependent => :destroy do
     def find_or_create(game)
       where(:game_id => game.id).first || create(:game => game, :value => Rating::DefaultValue, :pro => false)
@@ -45,6 +47,7 @@ class Player < ActiveRecord::Base
       :name => name,
       :email => email,
       :twitter => twitter,
+      :venue => venue.as_json,
     }
   end
 

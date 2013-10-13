@@ -1,7 +1,7 @@
 class Venue < ActiveRecord::Base
   attr_accessible :address, :description, :name
 
-  #has_many :players
+  has_many :players
 
   validates :name, :presence => true
   validates :address, :presence => true
@@ -12,5 +12,9 @@ class Venue < ActiveRecord::Base
       :address => address,
       :description => description
     }
+  end
+
+  def all_players
+    players.order("name ASC").includes([:venue])
   end
 end
