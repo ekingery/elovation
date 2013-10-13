@@ -1,6 +1,6 @@
 <div class="hero-unit">
   <h1><%= @venue.name %></h1>
-
+  <br />
   <div class="address"><%= link_to @venue.address, "https://maps.google.com/?q=" + @venue.address, target: "_blank" %></div>
   <div class="description"><%= @venue.description %></div>
   <section class="action-buttons">
