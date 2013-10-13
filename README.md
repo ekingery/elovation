@@ -3,7 +3,7 @@ Elovation
 
 [![Build Status](https://travis-ci.org/ekingery/elovation.png?branch=master)](https://travis-ci.org/ekingery/elovation)
 
-Elovation was born at Braintree. It's a simple rails app that tracks the results of any two player game and assigns ratings to the players using the [Elo rating system](http://en.wikipedia.org/wiki/Elo_rating_system).
+Elovation was [born at Braintree](https://github.com/drewolson/elovation/). It's a simple rails app that tracks the results of any two player game and assigns ratings to the players using the [Elo rating system](http://en.wikipedia.org/wiki/Elo_rating_system).
 
 
 Deployment
