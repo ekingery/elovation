@@ -11,6 +11,7 @@ gem 'dynamic_form', '1.1.4'
 gem 'elo', '0.1.0'
 gem 'params_cleaner', '0.4.2'
 gem 'newrelic_rpm'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.
