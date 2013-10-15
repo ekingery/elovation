@@ -4,15 +4,13 @@ ruby "1.9.3"
 
 gem 'rails', '3.2.11'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'pg', '0.14.1'
 gem 'json', '1.7.5'
 gem 'jquery-rails', '2.1.2'
 gem 'dynamic_form', '1.1.4'
 gem 'elo', '0.1.0'
 gem 'params_cleaner', '0.4.2'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
